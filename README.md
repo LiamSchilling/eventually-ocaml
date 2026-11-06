@@ -1,6 +1,6 @@
 # Eventually
 
-A small OCaml library for imposing logical time bounds on computations that may diverge.
+A small OCaml library for imposing logical time bounds on computations that may otherwise diverge.
 
 ## Usage
 
