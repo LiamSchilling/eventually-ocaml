@@ -16,8 +16,8 @@ val forever : timer
     - return a value of type ['a],
     - or timeout.
 
-    [x : 'a eventually] is said to {e converge} if
-    [run t x] terminates for all {e finite} [t : timer]. *)
+    [y : 'a eventually] is said to {e converge} if
+    [run t y] terminates for all {e finite} [t : timer]. *)
 type 'a eventually
 
 (** Advance the current [timer] by one unit,
@@ -38,5 +38,5 @@ val bind : 'a eventually -> ('a -> 'b eventually) -> 'b eventually
     - and [Some x] otherwise. *)
 val run : timer -> 'a eventually -> 'a option
 
-(** Should be raised if [run forever x] returns [None], which is impossible. *)
+(** Should be raised if [run forever y] returns [None], which is impossible. *)
 exception ForeverTimesout
