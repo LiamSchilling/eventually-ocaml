@@ -81,18 +81,18 @@ module ElemsUntilOne :
   (** On receiving [n], either
       - output and shutdown if [n] is the value [1],
       - otherwise request to continue. *)
-  let recv r n =
+  let recv m n =
     match n with
-    | 1 -> Error (r, true)
-    | _ -> Ok (r + 1)
+    | 1 -> Error (m, true)
+    | _ -> Ok (m + 1)
 
   (** Output and shutdown once the supply is empty. *)
-  let shutdown r = (r, false)
+  let shutdown m = (m, false)
 end
 
 (** Package a session interface in which the reader {!PrintElems}
     processes the Hailstone sequence writer {!HailstoneSequence}. *)
-module RunPrintElemsOfHailstone = Supply.Run(struct
+module PrintElemsOfHailstone = Supply.Run(struct
   type elem = int
   module Writer = HailstoneSequence
   module Reader = PrintElems
@@ -100,7 +100,7 @@ end)
 
 (** Package a session interface in which the reader {!ElemsUntilOne}
     processes the Hailstone sequence writer {!HailstoneSequence}. *)
-module RunElemsUntilOneInHailstonre = Supply.Run(struct
+module ElemsUntilOneInHailstonre = Supply.Run(struct
   type elem = int
   module Writer = HailstoneSequence
   module Reader = ElemsUntilOne
@@ -113,13 +113,13 @@ let hailstone k =
 (** A time-bounded computation that, when allocated time [u],
     prints the first [u] elements of the Hailstone sequence starting at [k]. *)
 let hailstone_printer k =
-  RunPrintElemsOfHailstone.run (hailstone k) (PrintElems.make ())
+  PrintElemsOfHailstone.run (hailstone k) (PrintElems.make ())
 
 (** A time-bounded computation that, when allocated time [u],
     searches [u] elements of the Hailstone sequence starting at [k]
     for the value [1]. *)
 let hailstone_counter k =
-  RunElemsUntilOneInHailstonre.run (hailstone k) (ElemsUntilOne.make ())
+  ElemsUntilOneInHailstonre.run (hailstone k) (ElemsUntilOne.make ())
 
 (** Prints the first [n] elements of the Hailstone sequence starting at [k]. *)
 let print_hailstone n k =

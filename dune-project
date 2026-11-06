@@ -32,8 +32,7 @@
   (ocaml (>= 4.14))
   (dune (>= 3.14)))
  (tags
-  (topics
-   "divergence"
+  ("divergence"
    "lazy evaluation"
    "streams"
    "monads")))
