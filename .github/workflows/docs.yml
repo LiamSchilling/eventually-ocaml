@@ -32,8 +32,11 @@ jobs:
         with:
           ocaml-compiler: 5.0
 
+      - name: Install dependencies
+        run: opam install . --deps-only --with-doc
+
       - name: Build documentation
-        run: dune build @doc
+        run: opam exec -- dune build @doc
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
