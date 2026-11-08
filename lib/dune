@@ -1,4 +1,4 @@
 (library
  (public_name eventually)
  (wrapped false)
- (private_modules util supply_intf))
+ (private_modules util))
