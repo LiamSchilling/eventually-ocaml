@@ -34,6 +34,6 @@ val forkjoin : 'a eventually -> 'b eventually -> ('a * 'b) eventually
     - and [Success x] otherwise. *)
 val run : Timer.timer -> 'a eventually -> 'a now
 
-(** Should be raised if [run forever y] returns [Timeout],
+(** Should be raised if [run Timer.forever y] returns [Timeout],
     which is impossible. *)
 exception ForeverTimesout

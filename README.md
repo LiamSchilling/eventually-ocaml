@@ -1,3 +1,5 @@
+[![OCaml-CI Build Status](https://img.shields.io/endpoint?url=https://ocaml.ci.dev/badge/LiamSchilling/eventually-ocaml/main&logo=ocaml)](https://ocaml.ci.dev/github/LiamSchilling/eventually-ocaml)
+
 # Eventually
 
 A small OCaml library for imposing logical time bounds on computations that may otherwise diverge.
@@ -12,7 +14,7 @@ dune exec eventually  # Run a small demonstration
 
 ## Time-bounded computations
 
-An `'a Eventually.eventually` is a computation subject to a logical time budget, which is consumed by way of `Eventually.tick`.
+An `'a Eventually.eventually` is a computation subject to a logical time budget, which is consumed by way of `Eventually.tick n`.
 
 ```ocaml
 let rec loop n =
@@ -27,15 +29,15 @@ let rec loop n =
 
 ```ocaml
 (* Prints "tick 3", "tick 2".
-   Returns [None]. *)
+   Returns [Eventually.Timeout]. *)
 let _ = Eventually.run (Timer.incr 2 Timer.zero) (loop 3)
 
 (* Prints "tick 3", "tick 2", "tick 1", "tick 0".
-   Returns [Some "foo"]. *)
+   Returns [Eventually.Success "foo"]. *)
 let _ = Eventually.run (Timer.incr 5 Timer.zero) (loop 3)
 
 (* Prints "tick -4", "tick -5".
-   Returns [None]. *)
+   Returns [Eventually.Timeout]. *)
 let _ = Eventually.run (Timer.incr 2 Timer.zero) (loop -4)
 ```
 
@@ -43,7 +45,7 @@ let _ = Eventually.run (Timer.incr 2 Timer.zero) (loop -4)
 
 ```ocaml
 (* Prints "tick 3", "tick 2", "tick 1", "tick 0".
-   Returns [Some "foo"]. *)
+   Returns [Eventually.Success "foo"]. *)
 let _ = Eventually.run (Timer.forever) (loop 3)
 
 (* Prints "tick -4", "tick -5", "tick -6", "tick -7"...
