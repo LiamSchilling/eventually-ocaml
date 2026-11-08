@@ -124,20 +124,19 @@ let hailstone_counter k =
 (** Prints the first [n] elements of the Hailstone sequence starting at [k]. *)
 let print_hailstone n k =
   Printf.printf "The first %d elements of `H%d` are: " n k;
-  match Eventually.run (Eventually.until n) (hailstone_printer k) with
-  | None -> Printf.printf "...\n"
-  | Some () -> raise HailstoneTerminates
+  match Eventually.run (Timer.incr n Timer.zero) (hailstone_printer k) with
+  | Timeout -> Printf.printf "...\n"
+  | Success () -> raise HailstoneTerminates
 
 (** Prints the number of steps until the Hailstone sequence starting at [k]
     reaches the value [1]. *)
 let count_hailstone k =
   Printf.printf "Number of steps until `H%d` reaches one: " k;
-  match Eventually.run Eventually.forever (hailstone_counter k) with
-  | None -> raise Eventually.ForeverTimesout
-  | Some (m, b) ->
-    match b with
-    | true -> Printf.printf "%d\n" m
-    | false -> raise HailstoneTerminates
+  match Eventually.run Timer.forever (hailstone_counter k) with
+  | Timeout -> raise Eventually.ForeverTimesout
+  | Success (m, b) ->
+    if b then Printf.printf "%d\n" m
+    else raise HailstoneTerminates
 
 (** Demonstrate the first [n] elements
     of the Hailstone sequence starting at [k]. *)

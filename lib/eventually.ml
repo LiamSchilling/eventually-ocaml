@@ -1,40 +1,38 @@
-type timer =
-  | Zero
-  | Incr of (unit -> timer)
+type 'a now =
+  | Timeout
+  | Success of 'a
 
-let rec until n =
-  if n <= 0 then Zero else Incr (fun () -> until (n - 1))
-
-let rec forever =
-  Incr (fun () -> forever)
+let ( let* ) y f =
+  match y with
+  | Timeout -> Timeout
+  | Success x -> f x
 
 type 'a eventually =
-  | Eventually of (timer -> ('a * timer) option)
+  | Eventually of (Timer.timer -> ('a * Timer.timer) now)
 
-let unbox (Eventually x) = x
+let unbox (Eventually f) = f
 
-let tick =
-  Eventually (function
-  | Zero -> None
-  | Incr s -> Some ((), s ()))
+let tick n =
+  Eventually (fun t1 ->
+    match Timer.decr n t1 with
+    | Ok t2 -> Success ((), t2)
+    | Error _ -> Timeout)
 
 let return x =
-  Eventually (fun t -> Some (x, t))
+  Eventually (fun t -> Success (x, t))
 
-let ( let+ ) y f = Option.map f y
-let ( let* ) y f = Option.bind y f
-
-let map f y =
-  Eventually (fun t1 ->
-    let+ (x, t2) = unbox y t1 in
-    (f x, t2))
-
-let bind y f =
+let sequence y f =
   Eventually (fun t1 ->
     let* (x, t2) = unbox y t1 in
     unbox (f x) t2)
 
+let forkjoin y z =
+  Eventually (fun t1 ->
+    let* (x, t2) = unbox y t1 in
+    let* (w, t3) = unbox z t1 in
+    Success ((x, w), Timer.min t2 t3))
+
 let run t y =
-  let+ (x, _) = unbox y t in x
+  let* (x, _) = unbox y t in Success x
 
 exception ForeverTimesout

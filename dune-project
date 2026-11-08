@@ -15,7 +15,7 @@
 
 (license MIT)
 
-;; (documentation https://url/to/documentation)
+(documentation https://liamschilling.github.io/eventually-ocaml/)
 
 (package
  (name eventually)

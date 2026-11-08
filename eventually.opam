@@ -15,6 +15,7 @@ authors: ["William (Liam) Schilling"]
 license: "MIT"
 tags: ["divergence" "lazy evaluation" "streams" "monads"]
 homepage: "https://github.com/LiamSchilling/eventually-ocaml"
+doc: "https://liamschilling.github.io/eventually-ocaml/"
 bug-reports: "https://github.com/LiamSchilling/eventually-ocaml/issues"
 depends: [
   "ocaml" {>= "4.14"}
