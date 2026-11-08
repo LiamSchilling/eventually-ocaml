@@ -1,13 +1,17 @@
+(** Defines domain-specific variant types. *)
 module Data = struct
+  (** The result of observing a supply. *)
   type ('a, 'b) emission =
     | End
     | Emit of 'a * 'b
 
+  (** The decision of a supply reader after processing one element. *)
   type ('a, 'b) verdict =
     | Continue of 'a
     | Return of 'b
 end
 
+(** An interface for finite-or-infinite supplies. *)
 module type WRITER = sig
   (** The type of elements. *)
   type elem
@@ -28,6 +32,7 @@ module type WRITER = sig
   val emit : writer -> (elem, writer) Data.emission
 end
 
+(** An interface for actors that process supplies. *)
 module type READER = sig
   (** The type of elements. *)
   type elem
@@ -55,6 +60,7 @@ module type READER = sig
   val shutdown : reader -> output
 end
 
+(** Determines a complete interaction between a [WRITER] and a [READER]. *)
 module type SESSION = sig
   (** The type of elements. *)
   type elem

@@ -14,7 +14,8 @@ dune exec eventually  # Run a small demonstration
 
 ## Examples
 
-- [Hailstone sequences](https://en.wikipedia.org/wiki/Collatz_conjecture): [`Hailstone.ml`](https://github.com/LiamSchilling/eventually-ocaml/blob/main/bin/hailstone.ml)
+- [Newton's method](https://en.wikipedia.org/wiki/Newton%27s_method): [`newton.ml`](https://github.com/LiamSchilling/eventually-ocaml/blob/main/bin/newton.ml)
+- [Hailstone sequences](https://en.wikipedia.org/wiki/Collatz_conjecture): [`hailstone.ml`](https://github.com/LiamSchilling/eventually-ocaml/blob/main/bin/hailstone.ml)
 
 ## Time-bounded computation
 

@@ -145,6 +145,9 @@ let demonstrate_hailstone n k =
 (** Main executable.
     Demonstrate the Hailstone sequences starting at 6 and at 27. *)
 let hailstone_main () =
+  Printf.printf "========================================\n";
+  Printf.printf "Hailstone Sequence Demonstration\n";
+  Printf.printf "========================================\n";
   demonstrate_hailstone 15 6;
   print_endline "";
   demonstrate_hailstone 30 27

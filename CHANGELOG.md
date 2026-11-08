@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `tick n` now accepts count `n` of ticks to consume
   - `bind` is renamed to `sequence`
   - return type of `run` is a custom `now` variant type with more informative constructor names
+- Changed interface of the `Supply` module:
+  - return type of `emit` in `WRITER` is a custom `emission` variant type with more informative constructor names
+  - return type of `recv` in `READER` is a custom `verdict` variant type with more informative constructor names
 
 ### Added
 - In module `Eventually`:
@@ -25,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `min` to choose the timer with fewer ticks left
   - `max` to choose the timer with more ticks left
 - Package tests for modules `Timer`, `Eventually`, and `Supply`
+- `Newton` demonstration using `Eventually` to bound potentially divergent executions of [Newton's method](https://en.wikipedia.org/wiki/Newton%27s_method)
 
 ### Removed
 - `until n` for `timer`
