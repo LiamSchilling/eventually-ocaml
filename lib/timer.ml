@@ -1,8 +1,8 @@
+open Util
+
 type timer =
   | Zero
   | Incr of (unit -> timer)
-
-let ticks_negative () = invalid_arg "number of ticks must be non-negative"
 
 let zero = Zero
 
@@ -13,8 +13,8 @@ let rec incr_unsafe n t =
   | _ -> let n' = n - 1 in Incr (fun () -> incr_unsafe n' t)
 
 let incr n t =
-  if n >= 0 then incr_unsafe n t
-  else ticks_negative ()
+  assert_ticks_nonnegative n;
+  incr_unsafe n t
 
 let rec decr_unsafe n m t =
   match n, t with
@@ -23,8 +23,8 @@ let rec decr_unsafe n m t =
   | _, Incr s -> decr_unsafe (n - 1) (m + 1) (s ())
 
 let decr n t =
-  if n >= 0 then decr_unsafe n 0 t
-  else ticks_negative ()
+  assert_ticks_nonnegative n;
+  decr_unsafe n 0 t
 
 let rec min t1 t2 =
   match t1, t2 with

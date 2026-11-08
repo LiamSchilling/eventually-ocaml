@@ -12,7 +12,11 @@ dune runtest          # Run tests
 dune exec eventually  # Run a small demonstration
 ```
 
-## Time-bounded computations
+## Examples
+
+- [Hailstone sequences](https://en.wikipedia.org/wiki/Collatz_conjecture): [`Hailstone.ml`](https://github.com/LiamSchilling/eventually-ocaml/blob/main/bin/hailstone.ml)
+
+## Time-bounded computation
 
 An `'a Eventually.eventually` is a computation subject to a logical time budget, which is consumed by way of `Eventually.tick n`.
 

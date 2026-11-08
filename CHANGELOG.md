@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `decr n` to decrement the number of ticks left by `n` and observe if the timer finishes
   - `min` to choose the timer with fewer ticks left
   - `max` to choose the timer with more ticks left
+- Package tests for modules `Timer`, `Eventually`, and `Supply`
 
 ### Removed
 - `until n` for `timer`

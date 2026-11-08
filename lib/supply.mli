@@ -1,3 +1,4 @@
+module Data = Supply_intf.Data
 module type WRITER = Supply_intf.WRITER
 module type READER = Supply_intf.READER
 module type SESSION = Supply_intf.SESSION
