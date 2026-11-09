@@ -53,4 +53,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Hailstone` demonstration using `Supply` to analyze [Hailstone sequences](https://en.wikipedia.org/wiki/Collatz_conjecture)
 
 [0.2.0]: https://github.com/LiamSchilling/eventually-ocaml/compare/b259322...release/0.2.0
-[0.1.0]: https://github.com/LiamSchilling/eventually-ocaml/commit/b259322
+[0.1.0]: https://github.com/LiamSchilling/eventually-ocaml/tree/b259322b2900be01c0f008ebbbea1cd482798022

@@ -20,15 +20,19 @@ let eventually_test () =
   let tick0 = Eventually.tick 0 in
   let tick1 = Eventually.tick 1 in
   let tick2 = Eventually.tick 2 in
+  let tickerror = Eventually.tick a_negative_time in 
   let pure = Eventually.return 42 in
 
   let par =
-    Eventually.sequence (Eventually.forkjoin tick1 tick2) (fun ((), ()) -> pure) in
+    Eventually.sequence (
+      Eventually.forkjoin tick1 tick2) (fun ((), ()) ->
+        pure) in
 
   let seq =
     Eventually.sequence tick0 (fun () ->
       Eventually.sequence tick1 (fun () ->
-        Eventually.sequence par (fun _ -> pure))) in
+        Eventually.sequence par (fun _ ->
+          pure))) in
 
   print_endline "✓ eventually constructors tests passed";
   
@@ -42,6 +46,6 @@ let eventually_test () =
 
   print_endline "✓ eventually control flow tests passed";
 
-  assert_raises_invalid_argument (fun () -> Eventually.tick (-1));
+  assert_raises_invalid_argument (fun () -> Eventually.run t0 tickerror);
 
   print_endline "✓ eventually error handling tests passed"

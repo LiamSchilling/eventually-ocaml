@@ -1,5 +1,3 @@
-open Util
-
 type 'a now =
   | Timeout
   | Success of 'a
@@ -15,7 +13,6 @@ type 'a eventually =
 let unbox (Eventually f) = f
 
 let tick n =
-  assert_ticks_nonnegative n;
   Eventually (fun t1 ->
     match Timer.decr n t1 with
     | Ok t2 -> Success ((), t2)

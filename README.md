@@ -46,7 +46,7 @@ let _ = Eventually.run (Timer.incr 5 Timer.zero) (loop 3)
 let _ = Eventually.run (Timer.incr 2 Timer.zero) (loop -4)
 ```
 
-`Eventually.forever` supplies infinitely many ticks.
+`Timer.forever` supplies infinitely many ticks.
 
 ```ocaml
 (* Prints "tick 3", "tick 2", "tick 1", "tick 0".

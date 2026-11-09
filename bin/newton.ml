@@ -86,4 +86,4 @@ let newton_main () =
   Printf.printf "========================================\n";
   demonstrate_sqrts 5 [ 1.0; 2.0; 4.0 ];
   print_endline "";
-  demonstrate_sqrts 1000000 [ -1.0; 1.0 ];
+  demonstrate_sqrts 1000000 [ -1.0; 1.0 ]

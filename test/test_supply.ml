@@ -96,7 +96,8 @@ let test_basic_supply () =
   (* Empty supply: writer makes 0 elements *)
   let writer = RangeWriter.make 0 in
   let reader = SumReader.make () in
-  (match Eventually.run Timer.forever (CountAndSumSession.run writer reader) with
+  let session = CountAndSumSession.run writer reader in
+  (match Eventually.run Timer.forever session with
   | Success 0 -> ()
   | Success _ -> failwith "Empty supply should sum to 0"
   | Timeout -> failwith "Empty supply should not timeout");
@@ -104,7 +105,8 @@ let test_basic_supply () =
   (* Small supply: 0+1+2 = 3 *)
   let writer = RangeWriter.make 3 in
   let reader = SumReader.make () in
-  (match Eventually.run Timer.forever (CountAndSumSession.run writer reader) with
+  let session = CountAndSumSession.run writer reader in
+  (match Eventually.run Timer.forever session with
   | Success 3 -> ()  (* sum of 0, 1, 2 *)
   | Success _ -> failwith "Expected sum 3"
   | Timeout -> failwith "Small supply should not timeout");
@@ -112,7 +114,8 @@ let test_basic_supply () =
   (* Larger supply *)
   let writer = RangeWriter.make 10 in
   let reader = SumReader.make () in
-  (match Eventually.run Timer.forever (CountAndSumSession.run writer reader) with
+  let session = CountAndSumSession.run writer reader in
+  (match Eventually.run Timer.forever session with
   | Success 45 -> ()  (* sum of 0..9 = 45 *)
   | Success _ -> failwith "Expected sum 45"
   | Timeout -> failwith "Supply should not timeout");
@@ -124,7 +127,8 @@ let test_supply_with_budget () =
   let writer = RangeWriter.make 5 in
   let reader = CountReader.make () in
   let t = Timer.incr 100 Timer.zero in
-  (match Eventually.run t (CountAndCountSession.run writer reader) with
+  let session = CountAndCountSession.run writer reader in
+  (match Eventually.run t session with
   | Success 5 -> ()
   | Success _ -> failwith "Expected count 5"
   | Timeout -> failwith "Should complete with generous budget");
@@ -133,14 +137,16 @@ let test_supply_with_budget () =
   let writer = RangeWriter.make 20 in
   let reader = CountReader.make () in
   let t = Timer.incr 3 Timer.zero in
-  (match Eventually.run t (CountAndCountSession.run writer reader) with
+  let session = CountAndCountSession.run writer reader in
+  (match Eventually.run t session with
   | Success _ -> failwith "Expected timeout"
   | Timeout -> ());
   
   (* Zero budget: should timeout immediately *)
   let writer = RangeWriter.make 10 in
   let reader = CountReader.make () in
-  (match Eventually.run Timer.zero (CountAndCountSession.run writer reader) with
+  let session = CountAndCountSession.run writer reader in
+  (match Eventually.run Timer.zero session with
   | Success _ -> failwith "Expected timeout"
   | Timeout -> ());
   
@@ -173,7 +179,8 @@ let test_supply_edge_cases () =
   (* Empty supply with any reader *)
   let writer = RangeWriter.make 0 in
   let reader = CountReader.make () in
-  (match Eventually.run Timer.forever (CountAndCountSession.run writer reader) with
+  let session = CountAndCountSession.run writer reader in
+  (match Eventually.run Timer.forever session with
   | Success 0 -> ()
   | Success _ -> failwith "Expected count 0"
   | Timeout -> failwith "Empty supply should not timeout");
@@ -181,7 +188,8 @@ let test_supply_edge_cases () =
   (* Empty supply with sum reader *)
   let writer = RangeWriter.make 0 in
   let reader = SumReader.make () in
-  (match Eventually.run Timer.forever (CountAndSumSession.run writer reader) with
+  let session = CountAndSumSession.run writer reader in
+  (match Eventually.run Timer.forever session with
   | Success 0 -> ()
   | Success _ -> failwith "Expected sum 0"
   | Timeout -> failwith "Empty supply should not timeout");
@@ -189,7 +197,8 @@ let test_supply_edge_cases () =
   (* Single element supply *)
   let writer = RangeWriter.make 1 in
   let reader = CountReader.make () in
-  (match Eventually.run Timer.forever (CountAndCountSession.run writer reader) with
+  let session = CountAndCountSession.run writer reader in
+  (match Eventually.run Timer.forever session with
   | Success 1 -> ()
   | Success _ -> failwith "Expected count 1"
   | Timeout -> failwith "Single element should not timeout");

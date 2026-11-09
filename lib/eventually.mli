@@ -17,7 +17,8 @@ type 'a now =
 (** Advance the current timer by [n] ticks,
     or timeout if the timer is already finished.
 
-    Raises [Invalid_argument] if [n] is negative. *)
+    Once the computation is [run],
+    raises [Invalid_argument] if [n] is negative. *)
 val tick : int -> unit eventually
 
 (** Return a pure value. *)
