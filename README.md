@@ -61,7 +61,7 @@ let _ = Eventually.run (Timer.forever) (loop -4)
 ## Project layout
 
 ```text
-lib/   The Eventually and Supply library modules
-bin/   The Hailstone demonstration executable
+lib/   The Timer, Eventually, and Supply library modules
+bin/   The Hailstone Sequence and Newton's Method demonstration executable
 test/  Package tests
 ```
