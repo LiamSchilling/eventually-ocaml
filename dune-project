@@ -2,7 +2,7 @@
 
 (name eventually)
 
-(version 0.1.0)
+(version 0.2.0)
 
 (generate_opam_files true)
 
@@ -15,7 +15,7 @@
 
 (license MIT)
 
-;; (documentation https://url/to/documentation)
+(documentation https://liamschilling.github.io/eventually-ocaml/)
 
 (package
  (name eventually)

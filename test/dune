@@ -1,3 +1,7 @@
 (test
- (name test_eventually)
+ (name test)
  (libraries eventually))
+
+(rule
+ (alias  runtest)
+ (action (run ./test.exe)))

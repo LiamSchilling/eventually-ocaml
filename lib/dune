@@ -1,3 +1,4 @@
 (library
  (public_name eventually)
- (wrapped false))
+ (wrapped false)
+ (private_modules util))

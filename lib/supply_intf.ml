@@ -1,3 +1,17 @@
+(** Defines domain-specific variant types. *)
+module Data = struct
+  (** The result of observing a supply. *)
+  type ('a, 'b) emission =
+    | End
+    | Emit of 'a * 'b
+
+  (** The decision of a supply reader after processing one element. *)
+  type ('a, 'b) verdict =
+    | Continue of 'a
+    | Return of 'b
+end
+
+(** An interface for finite-or-infinite supplies. *)
 module type WRITER = sig
   (** The type of elements. *)
   type elem
@@ -12,12 +26,13 @@ module type WRITER = sig
   val make : init -> writer
 
   (** [emit w] consumes [w] and returns either
-      - [None] if the supply is empty,
-      - or [Some (e, w')] where [e] is the next element from the supply
+      - [Empty] if the supply is empty,
+      - or [Emit (e, w')] where [e] is the next element from the supply
         and [w'] is the rest of the supply. *)
-  val emit : writer -> (elem * writer) option
+  val emit : writer -> (elem, writer) Data.emission
 end
 
+(** An interface for actors that process supplies. *)
 module type READER = sig
   (** The type of elements. *)
   type elem
@@ -37,14 +52,15 @@ module type READER = sig
 
   (** If [e] is the next element from the supply,
       then [recv r e] consumes [r] and returns either
-      - [Ok r'] to request further elements from the supply as [r'],
-      - or [Error x] to return the output value [x] and shutdown. *)
-  val recv : reader -> elem -> (reader, output) result
+      - [Continue r'] to request further elements from the supply as [r'],
+      - or [Return x] to return the output value [x] and shutdown. *)
+  val recv : reader -> elem -> (reader, output) Data.verdict
 
   (** [shutdown r] consumes [r] returns an output value. *)
   val shutdown : reader -> output
 end
 
+(** Determines a complete interaction between a [WRITER] and a [READER]. *)
 module type SESSION = sig
   (** The type of elements. *)
   type elem

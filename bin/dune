@@ -2,3 +2,7 @@
  (public_name eventually)
  (name main)
  (libraries eventually))
+
+(rule
+ (alias  runtest)
+ (action (run ./main.exe)))
