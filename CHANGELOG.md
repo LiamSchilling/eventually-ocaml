@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.2.0] - Unreleased
+## [0.2.0] - 2024-11-12
 
 ### Changed
 - Separated `timer` functionality into its own `Timer` module:
@@ -52,5 +52,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `Run.run` to execute a `SESSION`, using `Eventually` to account for divergent sessions
 - `Hailstone` demonstration using `Supply` to analyze [Hailstone sequences](https://en.wikipedia.org/wiki/Collatz_conjecture)
 
-[0.2.0]: https://github.com/LiamSchilling/eventually-ocaml/compare/b259322...release/0.2.0
-[0.1.0]: https://github.com/LiamSchilling/eventually-ocaml/tree/b259322b2900be01c0f008ebbbea1cd482798022
+[0.2.0]: https://github.com/LiamSchilling/eventually-ocaml/compare/0.1.0...0.2.0
+[0.1.0]: https://github.com/LiamSchilling/eventually-ocaml/tree/0.1.0

@@ -34,15 +34,15 @@ let rec loop n =
 
 ```ocaml
 (* Prints "tick 3", "tick 2".
-   Returns [Eventually.Timeout]. *)
+   Returns `Eventually.Timeout`. *)
 let _ = Eventually.run (Timer.incr 2 Timer.zero) (loop 3)
 
 (* Prints "tick 3", "tick 2", "tick 1", "tick 0".
-   Returns [Eventually.Success "foo"]. *)
+   Returns `Eventually.Success "foo"`. *)
 let _ = Eventually.run (Timer.incr 5 Timer.zero) (loop 3)
 
 (* Prints "tick -4", "tick -5".
-   Returns [Eventually.Timeout]. *)
+   Returns `Eventually.Timeout`. *)
 let _ = Eventually.run (Timer.incr 2 Timer.zero) (loop -4)
 ```
 
@@ -50,7 +50,7 @@ let _ = Eventually.run (Timer.incr 2 Timer.zero) (loop -4)
 
 ```ocaml
 (* Prints "tick 3", "tick 2", "tick 1", "tick 0".
-   Returns [Eventually.Success "foo"]. *)
+   Returns `Eventually.Success "foo"`. *)
 let _ = Eventually.run (Timer.forever) (loop 3)
 
 (* Prints "tick -4", "tick -5", "tick -6", "tick -7"...
