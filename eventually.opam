@@ -2,14 +2,8 @@
 opam-version: "2.0"
 version: "0.2.0"
 synopsis: "Time-bounded computations and stream iteration"
-description: """
-This package exposes the `eventually` monad
-   for computations run against a logical time budget,
-   which may be infinite (risking that the computation diverges)
-   or finite (resulting in a timeout instead).
-   The package provides a reader/writer interface for stream processing,
-   and implements time-bounded stream operations
-   by way of the `eventually` monad."""
+description:
+  "This package exposes the `eventually` monad for computations run against a logical time budget, which may be infinite (risking that the computation diverges) or finite (resulting in a timeout instead). The package provides a reader/writer interface for stream processing, and implements time-bounded stream operations by way of the `eventually` monad."
 maintainer: ["William (Liam) Schilling"]
 authors: ["William (Liam) Schilling"]
 license: "MIT"
@@ -18,8 +12,8 @@ homepage: "https://github.com/LiamSchilling/eventually-ocaml"
 doc: "https://liamschilling.github.io/eventually-ocaml/"
 bug-reports: "https://github.com/LiamSchilling/eventually-ocaml/issues"
 depends: [
+  "dune" {>= "3.14"}
   "ocaml" {>= "4.14"}
-  "dune" {>= "3.14" & >= "3.14"}
   "odoc" {with-doc}
 ]
 build: [

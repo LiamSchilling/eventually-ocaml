@@ -21,16 +21,9 @@
  (name eventually)
  (synopsis "Time-bounded computations and stream iteration")
  (description
-  "This package exposes the `eventually` monad
-   for computations run against a logical time budget,
-   which may be infinite (risking that the computation diverges)
-   or finite (resulting in a timeout instead).
-   The package provides a reader/writer interface for stream processing,
-   and implements time-bounded stream operations
-   by way of the `eventually` monad.")
+  "This package exposes the `eventually` monad for computations run against a logical time budget, which may be infinite (risking that the computation diverges) or finite (resulting in a timeout instead). The package provides a reader/writer interface for stream processing, and implements time-bounded stream operations by way of the `eventually` monad.")
  (depends
-  (ocaml (>= 4.14))
-  (dune (>= 3.14)))
+  (ocaml (>= 4.14)))
  (tags
   ("divergence"
    "lazy evaluation"
