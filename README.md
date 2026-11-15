@@ -4,7 +4,46 @@
 
 A small OCaml library for imposing logical time bounds on computations that may otherwise diverge.
 
-## Usage
+### Examples
+
+- Newton's method: [`newton.ml`](https://github.com/LiamSchilling/eventually-ocaml/blob/main/bin/newton.ml)
+- Hailstone sequences: [`hailstone.ml`](https://github.com/LiamSchilling/eventually-ocaml/blob/main/bin/hailstone.ml)
+
+## Use as a dependency
+
+Install the [opam package](https://opam.ocaml.org/packages/eventually/):
+
+```sh
+opam update
+opam install eventually
+```
+
+For Dune projects, add `eventually` to the `dune-project`:
+
+```lisp
+(package
+ (name my_project)
+ (depends ocaml eventually))
+```
+
+Add `eventually` to the `lib/dune` or `bin/dune`:
+
+```lisp
+(library
+ (name my_library)
+ (libraries eventually))
+```
+
+## Build and run locally
+
+Clone the [GitHub repository](https://github.com/LiamSchilling/eventually-ocaml):
+
+```sh
+git clone https://github.com/LiamSchilling/eventually-ocaml.git
+cd eventually-ocaml
+```
+
+Build and run locally:
 
 ```sh
 dune build            # Build the library and executable
@@ -12,12 +51,7 @@ dune runtest          # Run tests
 dune exec eventually  # Run a small demonstration
 ```
 
-## Examples
-
-- [Newton's method](https://en.wikipedia.org/wiki/Newton%27s_method): [`newton.ml`](https://github.com/LiamSchilling/eventually-ocaml/blob/main/bin/newton.ml)
-- [Hailstone sequences](https://en.wikipedia.org/wiki/Collatz_conjecture): [`hailstone.ml`](https://github.com/LiamSchilling/eventually-ocaml/blob/main/bin/hailstone.ml)
-
-## Time-bounded computation
+## Time-bounded computations
 
 An `'a Eventually.eventually` is a computation subject to a logical time budget, which is consumed by way of `Eventually.tick n`.
 
